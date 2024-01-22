@@ -1,0 +1,25 @@
+#!/usr/bin/python3
+from sys import argv
+
+def is_prime(num):
+    if num < 2:
+        return False
+    for i in range(2, int(num ** 0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
+
+with open(argv[1]) as f:
+    for line in f:
+        num = int(line)
+        print(f"{num}=", end='')
+
+        if is_prime(num):
+            print("Prime")
+        else:
+            for i in range(2, num):
+                if num % i == 0 and is_prime(i):
+                    factor = num // i
+                    if is_prime(factor):
+                        print(f"{i}*{factor}")
+                        break
